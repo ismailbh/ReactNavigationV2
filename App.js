@@ -3,20 +3,39 @@ import {
   View,
   Text,
   StyleSheet,
-  SafeAreaView
+  Platform,
+  StatusBar,
+  SafeAreaView,
+  Image
 } from "react-native";
-import { createAppContainer, createMaterialTopTabNavigator } from 'react-navigation'
-import Icon from 'react-native-vector-icons/Ionicons'
+import { createDrawerNavigator, DrawerItems, createAppContainer } from 'react-navigation'
+import { Container, Content, Header, Body } from 'native-base'
+
+const CustomDrawerContentComponent = (props) => (
+  <Container>
+    <SafeAreaView style={styles.safeArea}>
+
+      <Header style={styles.drawerHeader}>
+        <Body>
+          <Image
+            style={styles.drawerImage}
+            source={require('./src/assets/img_logo.png')} />
+        </Body>
+      </Header>
+
+      <Content>
+        <DrawerItems {...props} />
+      </Content>
+    </SafeAreaView>
+
+  </Container>
+
+);
 
 export default class App extends Component {
   render() {
     return (
-      <SafeAreaView style={{
-        flex: 1, backgroundColor: '#f2f2f2'
-      }}>
-
-        <AppTabNavigator />
-      </SafeAreaView>
+      <AppDrawerNavgation />
     )
   }
 }
@@ -30,62 +49,51 @@ class HomeScreen extends Component {
     );
   }
 }
+
 class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
         <Text>Settings</Text>
+
       </View>
-    );
+    )
   }
 }
 
-const materialTopTabNavigator = createMaterialTopTabNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-home" color={tintColor} size={24} />
-      )
-    }
-  },
-  Settings: {
-    screen: SettingsScreen,
-    navigationOptions: {
-      tabBarLabel: 'Settings',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-settings" color={tintColor} size={24} />
-      )
-    }
-  }
+const AppDrawerNavigator = createDrawerNavigator({
+  Home: HomeScreen,
+  Settings: SettingsScreen
 }, {
-  initialRouteName: 'Home',
-  // order: ['Settings', 'Home'],
-  tabBarPosition: 'bottom',
-  swipeEnabled: true,
-  animationEnabled: false,
-  tabBarOptions: {
-    activeTintColor: 'orange',
-    inactiveTintColor: 'grey',
-    style: {
-      backgroundColor: '#f2f2f2',
-      borderTopWidth: 0.5,
-      borderTopColor: 'grey'
-    },
-    indicatorStyle: {
-      height: 0
-    },
-    showIcon: true
-  }
-})
+    initialRouteName: 'Home',
+    drawerPosition: 'left',
+    contentComponent: CustomDrawerContentComponent,
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle',
 
-const AppTabNavigator = createAppContainer(materialTopTabNavigator);
+  });
+
+const AppDrawerNavgation = createAppContainer(AppDrawerNavigator);
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: 'white'
+  },
+
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  drawerHeader: {
+    height: 200,
+    backgroundColor: 'white'
+  },
+  drawerImage: {
+    height: 150,
+    width: 150,
+    borderRadius: 75
   }
 });
