@@ -40,7 +40,6 @@ class SettingsScreen extends Component {
   }
 }
 
-
 const materialTopTabNavigator = createMaterialTopTabNavigator({
   Home: {
     screen: HomeScreen,
@@ -61,20 +60,25 @@ const materialTopTabNavigator = createMaterialTopTabNavigator({
     }
   }
 }, {
-    initialRouteName: 'Home',
-    // order: ['Settings', 'Home'],
-    tabBarOptions: {
-      activeTintColor: 'orange',
-      inactiveTintColor: 'grey',
-      style: {
-        backgroundColor: '#f2f2f2'
-      },
-      indicatorStyle: {
-        height: 0
-      },
-      showIcon: true
-    }
-  })
+  initialRouteName: 'Home',
+  // order: ['Settings', 'Home'],
+  tabBarPosition: 'bottom',
+  swipeEnabled: true,
+  animationEnabled: false,
+  tabBarOptions: {
+    activeTintColor: 'orange',
+    inactiveTintColor: 'grey',
+    style: {
+      backgroundColor: '#f2f2f2',
+      borderTopWidth: 0.5,
+      borderTopColor: 'grey'
+    },
+    indicatorStyle: {
+      height: 0
+    },
+    showIcon: true
+  }
+})
 
 const AppTabNavigator = createAppContainer(materialTopTabNavigator);
 
