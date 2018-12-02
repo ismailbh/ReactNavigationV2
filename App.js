@@ -4,20 +4,19 @@ import {
   Text,
   StyleSheet
 } from "react-native";
-
-import { createBottomTabNavigator, createAppContainer } from 'react-navigation'
+import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs'
+import { createAppContainer } from "react-navigation";
 import Icon from 'react-native-vector-icons/Ionicons'
-
-export class Home extends Component {
+class HomeScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello</Text>
+        <Text>Home</Text>
       </View>
     );
   }
 }
-export class Settings extends Component {
+class SettingsScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -26,9 +25,11 @@ export class Settings extends Component {
     );
   }
 }
-const bottomNavigator = createBottomTabNavigator({
+
+
+const materialBottomTabNavigator = createMaterialBottomTabNavigator({
   Home: {
-    screen: Home,
+    screen: HomeScreen,
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
@@ -37,30 +38,22 @@ const bottomNavigator = createBottomTabNavigator({
     }
   },
   Settings: {
-    screen: Settings,
+    screen: SettingsScreen,
     navigationOptions: {
-      tabBarLabel: 'Settings',
+      tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
         <Icon name="ios-settings" color={tintColor} size={24} />
       )
     }
   }
+}, {
+    initialRouteName: 'Home',
+    // order: ['Settings', 'Home'],
+    activeTintColor: 'white',
+    shifting: true
+  })
 
-}, {//router config
-    initialRouteName: 'Settings',
-    order: ['Settings', 'Home'],
-    //navigation for complete tab navigator
-    navigationOptions: {
-      tabBarVisible: true
-    },
-    tabBarOptions: {
-      activeTintColor: 'red',
-      inactiveTintColor: 'grey'
-    }
-  });
-
-
-  export default createAppContainer(bottomNavigator);
+export default createAppContainer(materialBottomTabNavigator);
 
 const styles = StyleSheet.create({
   container: {
