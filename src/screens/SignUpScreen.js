@@ -5,16 +5,16 @@ import {
     StyleSheet
 } from "react-native";
 
-class HomeScreen extends Component {
+class SignUpScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>HomeScreen</Text>
+                <Text>SignUpScreen</Text>
             </View>
         );
     }
 }
-export default HomeScreen;
+export default SignUpScreen;
 
 const styles = StyleSheet.create({
     container: {
