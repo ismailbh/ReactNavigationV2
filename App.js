@@ -6,20 +6,6 @@ import {
   TouchableOpacity
 } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons'
-/**
- * createSwitchNavigator - Only Show ONE SCREEN/STACK at one time
- *  1. Loading Screen
- *  2. Authentication StackNavigator
- *    - Auth Welcome Screen
- *    - SignIn Screen
- *    - Sign Up Screen
- *  3. AppDrawerNavigator
- *    - App StackNavigator (to give a common header to the tabs)
- *       - App TabNavigator
- *         - Home Tab
- *         - Settings Tab
- */
-
 
 import { createAppContainer, createSwitchNavigator, createStackNavigator, createDrawerNavigator, createBottomTabNavigator } from 'react-navigation'
 import AuthLoadingScreen from './src/screens/AuthLoadingScreen'
