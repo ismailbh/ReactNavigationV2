@@ -2,14 +2,17 @@ import React, { Component } from "react";
 import {
     View,
     Text,
-    StyleSheet
+    StyleSheet,
+    Button
 } from "react-native";
 
 class HomeScreen extends Component {
+
     render() {
         return (
             <View style={styles.container}>
-                <Text>HomeScreen</Text>
+                <Button title="go back to login screen" onPress={() => this.props.navigation.goBack()} />
+                <Button title="go back to login screen" onPress={() => this.props.navigation.popToTop()} />
             </View>
         );
     }
